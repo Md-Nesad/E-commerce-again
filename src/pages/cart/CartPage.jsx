@@ -12,8 +12,10 @@ import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { fireDB } from "../../firebase/FirebaseConfig";
 import BuyNowModal from "../../components/buyNowModal/BuyNowModal";
 import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -96,6 +98,7 @@ const CartPage = () => {
         mobileNumber: "",
       });
       toast.success("Order Placed Successfull");
+      navigate("/user-dashboard");
     } catch (error) {
       console.log(error);
     }
@@ -155,7 +158,7 @@ const CartPage = () => {
                                   </div>
                                   <div className="mt-1 flex items-end">
                                     <p className="text-sm font-medium text-gray-900">
-                                      ₹{price}
+                                      ${price}
                                     </p>
                                   </div>
                                 </div>
@@ -225,7 +228,7 @@ const CartPage = () => {
                       Price ({cartItemTotal} item)
                     </dt>
                     <dd className="text-sm font-medium text-gray-900">
-                      ₹ {cartTotal}
+                      $ {cartTotal}
                     </dd>
                   </div>
                   <div className="flex items-center justify-between py-4">
@@ -239,7 +242,7 @@ const CartPage = () => {
                       Total Amount
                     </dt>
                     <dd className="text-base font-medium text-gray-900">
-                      ₹ {cartTotal}
+                      $ {cartTotal}
                     </dd>
                   </div>
                 </dl>
